@@ -23,13 +23,22 @@ function addResult() {
   });
 }
 
-function handleDownloadClick() {
-  // Tạo một liên kết tạm thời để tải ảnh
-  const a = document.createElement("a");
-  a.href = "https://i.pinimg.com/564x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg";
-  a.download = "downloaded_image.jpg"; // Tên file khi tải về
-  a.style.display = "none";
+async function handleDownloadClick() {
+  // Đường dẫn URL của ảnh bạn muốn tải
+  var imageUrl =
+    "https://i.pinimg.com/564x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg";
+
+  const response = await fetch(imageUrl);
+
+  const blobImage = await response.blob();
+
+  const href = URL.createObjectURL(blobImage);
+
+  let a = document.createElement("a");
+  a.href = href;
+  a.download = "ten_anh.jpg"; // Tên bạn muốn đặt cho ảnh khi lưu
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+  window.URL.revokeObjectURL(href);
 }
