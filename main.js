@@ -28,7 +28,9 @@ async function handleDownloadClick() {
   var imageUrl =
     "https://i.pinimg.com/564x/56/1b/64/561b6478c1352784e0cd4c7030e416b4.jpg";
 
-  const response = await fetch(imageUrl);
+  const response = await fetch(imageUrl,{
+    mode:"no-cors"
+  });
 
   const blobImage = await response.blob();
 
